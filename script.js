@@ -1,8 +1,11 @@
-// ==========================================
-// HOK Strategy Board V2
-// ==========================================
+// =========================================
+// HOK Strategy Board V3
+// =========================================
 
 const board = document.getElementById("board");
+
+const map = document.getElementById("map");
+
 const roles = document.querySelectorAll(".role");
 
 const resetBtn = document.getElementById("resetBtn");
@@ -12,148 +15,132 @@ const sizeSlider = document.getElementById("sizeSlider");
 const sizeValue = document.getElementById("sizeValue");
 
 
-// ==========================================
-// Posisi Awal
-// ==========================================
+// =========================================
+// DRAG
+// =========================================
 
-const START_POSITION = {
+let activeRole = null;
 
-    "blue-jgl":{x:30,y:90},
-    "blue-mid":{x:30,y:170},
-    "blue-farm":{x:30,y:250},
-    "blue-clash":{x:30,y:330},
-    "blue-roam":{x:30,y:410},
+let offsetX = 0;
+let offsetY = 0;
 
-    "red-jgl":{x:0,y:90,right:true},
-    "red-mid":{x:0,y:170,right:true},
-    "red-farm":{x:0,y:250,right:true},
-    "red-clash":{x:0,y:330,right:true},
-    "red-roam":{x:0,y:410,right:true}
+roles.forEach(role => {
 
-};
-
-
-// ==========================================
-// Pasang Posisi Awal
-// ==========================================
-
-function setupRoles(){
-
-    roles.forEach(role=>{
-
-        const pos=START_POSITION[role.id];
-
-        role.style.top=pos.y+"px";
-
-        if(pos.right){
-
-            role.style.right="30px";
-            role.style.left="auto";
-
-        }else{
-
-            role.style.left=pos.x+"px";
-            role.style.right="auto";
-
-        }
-
-    });
-
-}
-
-window.onload=setupRoles;
-
-
-// ==========================================
-// DRAG SYSTEM
-// ==========================================
-
-let currentRole=null;
-
-let offsetX=0;
-let offsetY=0;
-
-
-roles.forEach(role=>{
-
-    role.addEventListener("pointerdown",startDrag);
+    role.addEventListener("pointerdown", startDrag);
 
 });
 
 
 function startDrag(e){
 
-    currentRole=e.target;
+    activeRole = e.target;
 
-    currentRole.setPointerCapture(e.pointerId);
+    activeRole.setPointerCapture(e.pointerId);
 
-    const rect=currentRole.getBoundingClientRect();
+    const rect = activeRole.getBoundingClientRect();
 
-    offsetX=e.clientX-rect.left;
-    offsetY=e.clientY-rect.top;
+    offsetX = e.clientX - rect.left;
+    offsetY = e.clientY - rect.top;
 
-    currentRole.style.cursor="grabbing";
-    currentRole.style.zIndex=9999;
-    currentRole.style.transform="scale(1.08)";
+    activeRole.style.zIndex = 9999;
 
 }
 
 
-document.addEventListener("pointermove",moveRole);
+document.addEventListener("pointermove", dragRole);
 
-function moveRole(e){
+function dragRole(e){
 
-    if(!currentRole) return;
+    if(!activeRole) return;
 
-    const boardRect=board.getBoundingClientRect();
+    const boardRect = board.getBoundingClientRect();
 
-    let x=e.clientX-boardRect.left-offsetX;
-    let y=e.clientY-boardRect.top-offsetY;
+    let x = e.clientX - boardRect.left - offsetX;
+    let y = e.clientY - boardRect.top - offsetY;
 
-    const maxX=board.clientWidth-currentRole.offsetWidth;
-    const maxY=board.clientHeight-currentRole.offsetHeight;
+    const maxX = board.clientWidth - activeRole.offsetWidth;
+    const maxY = board.clientHeight - activeRole.offsetHeight;
 
-    x=Math.max(0,Math.min(x,maxX));
-    y=Math.max(0,Math.min(y,maxY));
+    x = Math.max(0, Math.min(maxX, x));
+    y = Math.max(0, Math.min(maxY, y));
 
-    currentRole.style.left=x+"px";
-    currentRole.style.top=y+"px";
-    currentRole.style.right="auto";
-
-}
-
-
-document.addEventListener("pointerup",endDrag);
-
-function endDrag(){
-
-    if(!currentRole) return;
-
-    currentRole.style.cursor="grab";
-    currentRole.style.transform="scale(1)";
-    currentRole.style.zIndex=10;
-
-    currentRole=null;
+    activeRole.style.left = x + "px";
+    activeRole.style.top = y + "px";
 
 }
 
 
-// ==========================================
+document.addEventListener("pointerup", () => {
+
+    if(!activeRole) return;
+
+    activeRole.style.zIndex = 10;
+
+    activeRole = null;
+
+});
+
+
+// =========================================
 // RESET
-// ==========================================
+// =========================================
 
-resetBtn.onclick=()=>{
+function resetRoles(){
 
-    setupRoles();
+    const isMobile = window.innerWidth <= 768;
 
-};
+    if(isMobile){
+
+        document.getElementById("blue-jgl").style.left="5%";
+        document.getElementById("blue-mid").style.left="5%";
+        document.getElementById("blue-farm").style.left="5%";
+        document.getElementById("blue-clash").style.left="5%";
+        document.getElementById("blue-roam").style.left="5%";
+
+        document.getElementById("red-jgl").style.left="85%";
+        document.getElementById("red-mid").style.left="85%";
+        document.getElementById("red-farm").style.left="85%";
+        document.getElementById("red-clash").style.left="85%";
+        document.getElementById("red-roam").style.left="85%";
+
+    }else{
+
+        document.getElementById("blue-jgl").style.left="30px";
+        document.getElementById("blue-mid").style.left="30px";
+        document.getElementById("blue-farm").style.left="30px";
+        document.getElementById("blue-clash").style.left="30px";
+        document.getElementById("blue-roam").style.left="30px";
+
+        document.getElementById("red-jgl").style.left="calc(100% - 90px)";
+        document.getElementById("red-mid").style.left="calc(100% - 90px)";
+        document.getElementById("red-farm").style.left="calc(100% - 90px)";
+        document.getElementById("red-clash").style.left="calc(100% - 90px)";
+        document.getElementById("red-roam").style.left="calc(100% - 90px)";
+
+    }
+
+    const startY = [100,190,280,370,460];
+
+    roles.forEach((role,index)=>{
+
+        role.style.top = startY[index % 5] + "px";
+
+    });
+
+}
+
+resetBtn.onclick = resetRoles;
+
+window.onload = resetRoles;
+
+window.onresize = resetRoles;
 
 
-// ==========================================
+// =========================================
 // FULLSCREEN
-// ==========================================
+// =========================================
 
-fullscreenBtn.onclick=()=>{
+fullscreenBtn.onclick = () => {
 
     if(!document.fullscreenElement){
 
@@ -168,9 +155,9 @@ fullscreenBtn.onclick=()=>{
 };
 
 
-// ==========================================
-// SLIDER UKURAN ICON
-// ==========================================
+// =========================================
+// ICON SIZE
+// =========================================
 
 sizeSlider.addEventListener("input",()=>{
 
@@ -178,43 +165,31 @@ sizeSlider.addEventListener("input",()=>{
 
         "--role-size",
 
-        sizeSlider.value+"px"
+        sizeSlider.value + "px"
 
     );
 
-    sizeValue.innerHTML=sizeSlider.value+" px";
+    sizeValue.textContent = sizeSlider.value + " px";
 
 });
 
 
-// ==========================================
+// =========================================
 // SHORTCUT
-// ==========================================
+// =========================================
 
 document.addEventListener("keydown",(e)=>{
 
-    switch(e.key.toLowerCase()){
+    if(e.key==="f") fullscreenBtn.click();
 
-        case "f":
-
-            fullscreenBtn.click();
-
-            break;
-
-        case "r":
-
-            resetBtn.click();
-
-            break;
-
-    }
+    if(e.key==="r") resetBtn.click();
 
 });
 
 
-// ==========================================
-// Disable Default Drag
-// ==========================================
+// =========================================
+// DISABLE DEFAULT IMAGE DRAG
+// =========================================
 
 document.querySelectorAll("img").forEach(img=>{
 
