@@ -1,0 +1,301 @@
+/* ===========================================
+   HOK STRATEGY BOARD
+   FINAL V2
+=========================================== */
+
+:root{
+
+    --role-size:60px;
+
+}
+
+/* ===========================================
+   RESET
+=========================================== */
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    background:#111;
+
+    font-family:Arial,Helvetica,sans-serif;
+
+}
+
+
+/* ===========================================
+   TOOLBAR
+=========================================== */
+
+#toolbar{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:65px;
+
+    background:#1a1a1a;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 20px;
+
+    color:white;
+
+    z-index:99999;
+
+    border-bottom:1px solid #2d2d2d;
+
+}
+
+#toolbar h1{
+
+    font-size:24px;
+
+}
+
+.toolbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+/* ===========================================
+   SLIDER
+=========================================== */
+
+.slider-group{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:white;
+
+    font-size:14px;
+
+}
+
+#sizeSlider{
+
+    width:180px;
+
+    cursor:pointer;
+
+}
+
+#sizeValue{
+
+    width:50px;
+
+    text-align:center;
+
+}
+
+/* ===========================================
+   BUTTON
+=========================================== */
+
+button{
+
+    padding:10px 18px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2B8CFF;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.2s;
+
+}
+
+button:hover{
+
+    background:#4DA4FF;
+
+}
+
+/* ===========================================
+   BOARD
+=========================================== */
+
+#board{
+
+    position:relative;
+
+    width:100vw;
+
+    height:calc(100vh - 65px);
+
+    margin-top:65px;
+
+    overflow:hidden;
+
+    background:#202020;
+
+}
+
+/* ===========================================
+   MAP
+=========================================== */
+
+#map{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:95%;
+
+    height:95%;
+
+    object-fit:contain;
+
+    pointer-events:none;
+
+    user-select:none;
+
+}
+
+/* ===========================================
+   ROLE
+=========================================== */
+
+.role{
+
+    position:absolute;
+
+    width:var(--role-size);
+
+    cursor:grab;
+
+    touch-action:none;
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+    z-index:10;
+
+    transition:
+        transform .12s ease,
+        filter .12s ease;
+
+}
+
+.role:hover{
+
+    transform:scale(1.08);
+
+}
+
+.role:active{
+
+    cursor:grabbing;
+
+}
+
+/* ===========================================
+   RESPONSIVE
+=========================================== */
+
+@media(max-width:1000px){
+
+    #toolbar h1{
+
+        font-size:20px;
+
+    }
+
+    #sizeSlider{
+
+        width:120px;
+
+    }
+
+}
+
+@media(max-width:700px){
+
+    #toolbar{
+
+        padding:10px;
+
+        height:70px;
+
+        flex-wrap:wrap;
+
+    }
+
+    #board{
+
+        margin-top:70px;
+
+        height:calc(100vh - 70px);
+
+    }
+
+    #toolbar h1{
+
+        font-size:18px;
+
+    }
+
+    .toolbar-right{
+
+        gap:8px;
+
+    }
+
+    #sizeSlider{
+
+        width:90px;
+
+    }
+
+    button{
+
+        padding:8px 12px;
+
+        font-size:12px;
+
+    }
+
+}

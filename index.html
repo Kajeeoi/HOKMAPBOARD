@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>HOK Strategy Board</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- =========================
+         TOOLBAR
+    ========================== -->
+
+    <header id="toolbar">
+
+        <h1>HOK Strategy Board</h1>
+
+        <div class="toolbar-right">
+
+            <div class="slider-group">
+
+                <span>Icon</span>
+
+                <input
+                    type="range"
+                    id="sizeSlider"
+                    min="30"
+                    max="120"
+                    value="60">
+
+                <span id="sizeValue">
+                    60 px
+                </span>
+
+            </div>
+
+            <button id="fullscreenBtn">
+
+                ⛶ Fullscreen
+
+            </button>
+
+            <button id="resetBtn">
+
+                Reset
+
+            </button>
+
+        </div>
+
+    </header>
+
+    <!-- =========================
+         BOARD
+    ========================== -->
+
+    <main id="board">
+
+        <!-- MAP -->
+
+        <img
+            id="map"
+            src="assets/map.png"
+            draggable="false"
+            alt="Honor of Kings Map">
+
+
+        <!-- =====================
+             BLUE TEAM
+        ====================== -->
+
+        <img
+            id="blue-jgl"
+            class="role"
+            src="assets/junglerblue.png"
+            draggable="false">
+
+        <img
+            id="blue-mid"
+            class="role"
+            src="assets/midblue.png"
+            draggable="false">
+
+        <img
+            id="blue-farm"
+            class="role"
+            src="assets/farmblue.png"
+            draggable="false">
+
+        <img
+            id="blue-clash"
+            class="role"
+            src="assets/clashblue.png"
+            draggable="false">
+
+        <img
+            id="blue-roam"
+            class="role"
+            src="assets/roamblue.png"
+            draggable="false">
+
+
+        <!-- =====================
+             RED TEAM
+        ====================== -->
+
+        <img
+            id="red-jgl"
+            class="role"
+            src="assets/jungred.png"
+            draggable="false">
+
+        <img
+            id="red-mid"
+            class="role"
+            src="assets/midred.png"
+            draggable="false">
+
+        <img
+            id="red-farm"
+            class="role"
+            src="assets/farmred.png"
+            draggable="false">
+
+        <img
+            id="red-clash"
+            class="role"
+            src="assets/clashred.png"
+            draggable="false">
+
+        <img
+            id="red-roam"
+            class="role"
+            src="assets/roamred.png"
+            draggable="false">
+
+    </main>
+
+    <!-- =========================
+         SCRIPT
+    ========================== -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
