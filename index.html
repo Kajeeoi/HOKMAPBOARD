@@ -2,36 +2,28 @@
 <html lang="id">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>HOK Strategy Board</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
 
-<body class="desktop">
+<body>
 
-    <!-- ================================= -->
+    <!-- ========================= -->
     <!-- TOOLBAR -->
-    <!-- ================================= -->
+    <!-- ========================= -->
 
     <header id="toolbar">
 
-        <div class="toolbar-left">
+        <h1>HOK Strategy Board</h1>
 
-            <h1>HOK Strategy Board</h1>
+        <div id="toolbarMenu">
 
-        </div>
-
-        <div class="toolbar-center">
-
-            <label for="sizeSlider">
-                Icon
+            <label>
+                Icon Size
             </label>
 
             <input
@@ -42,27 +34,11 @@
                 value="60">
 
             <span id="sizeValue">
-                60 px
+                60px
             </span>
 
-        </div>
-
-        <div class="toolbar-right">
-
-            <button id="desktopMode">
-                🖥 Desktop
-            </button>
-
-            <button id="tabletMode">
-                📟 Tablet
-            </button>
-
-            <button id="mobileMode">
-                📱 Mobile
-            </button>
-
             <button id="fullscreenBtn">
-                ⛶ Fullscreen
+                Fullscreen
             </button>
 
             <button id="resetBtn">
@@ -73,10 +49,9 @@
 
     </header>
 
-
-    <!-- ================================= -->
+    <!-- ========================= -->
     <!-- BOARD -->
-    <!-- ================================= -->
+    <!-- ========================= -->
 
     <main id="board">
 
@@ -84,88 +59,70 @@
 
         <aside id="bluePanel">
 
-            <img
-                id="blue-jgl"
+            <img id="blue-jgl"
                 class="role"
                 src="assets/junglerblue.png"
                 draggable="false">
 
-            <img
-                id="blue-mid"
+            <img id="blue-mid"
                 class="role"
                 src="assets/midblue.png"
                 draggable="false">
 
-            <img
-                id="blue-farm"
+            <img id="blue-farm"
                 class="role"
                 src="assets/farmblue.png"
                 draggable="false">
 
-            <img
-                id="blue-clash"
+            <img id="blue-clash"
                 class="role"
                 src="assets/clashblue.png"
                 draggable="false">
 
-            <img
-                id="blue-roam"
+            <img id="blue-roam"
                 class="role"
                 src="assets/roamblue.png"
                 draggable="false">
 
         </aside>
 
-
-
         <!-- MAP -->
 
         <section id="mapArea">
 
-            <div id="mapWrapper">
-
-                <img
-                    id="map"
-                    src="assets/map.png"
-                    draggable="false"
-                    alt="Honor of Kings Map">
-
-            </div>
+            <img
+                id="map"
+                src="assets/map.png"
+                draggable="false"
+                alt="Honor of Kings Map">
 
         </section>
-
-
 
         <!-- RED TEAM -->
 
         <aside id="redPanel">
 
-            <img
-                id="red-jgl"
+            <img id="red-jgl"
                 class="role"
                 src="assets/jungred.png"
                 draggable="false">
 
-            <img
-                id="red-mid"
+            <img id="red-mid"
                 class="role"
                 src="assets/midred.png"
                 draggable="false">
 
-            <img
-                id="red-farm"
+            <img id="red-farm"
                 class="role"
                 src="assets/farmred.png"
                 draggable="false">
 
-            <img
-                id="red-clash"
+            <img id="red-clash"
                 class="role"
                 src="assets/clashred.png"
                 draggable="false">
 
-            <img
-                id="red-roam"
+            <img id="red-roam"
                 class="role"
                 src="assets/roamred.png"
                 draggable="false">
@@ -173,7 +130,6 @@
         </aside>
 
     </main>
-
 
     <script src="script.js"></script>
 
