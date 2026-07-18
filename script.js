@@ -1,12 +1,8 @@
-// ==========================================
-// HOK Strategy Board V1
-// ==========================================
+// ======================================
+// HOK Strategy Board
+// ======================================
 
-// ==========================
-// ELEMENT
-// ==========================
-
-const body = document.body;
+// ===== ELEMENT =====
 
 const board = document.getElementById("board");
 
@@ -15,61 +11,27 @@ const roles = document.querySelectorAll(".role");
 const slider = document.getElementById("sizeSlider");
 const sizeValue = document.getElementById("sizeValue");
 
-const desktopBtn = document.getElementById("desktopMode");
-const tabletBtn = document.getElementById("tabletMode");
-const mobileBtn = document.getElementById("mobileMode");
-
 const fullscreenBtn = document.getElementById("fullscreenBtn");
 const resetBtn = document.getElementById("resetBtn");
 
 
-// ==========================
-// VIEW MODE
-// ==========================
-
-desktopBtn.onclick = () => {
-
-    body.className = "desktop";
-
-};
-
-tabletBtn.onclick = () => {
-
-    body.className = "tablet";
-
-};
-
-mobileBtn.onclick = () => {
-
-    body.className = "mobile";
-
-};
-
-
-// ==========================
-// ICON SIZE
-// ==========================
+// ===== ICON SIZE =====
 
 slider.addEventListener("input", () => {
 
     document.documentElement.style.setProperty(
-
         "--role-size",
-
         slider.value + "px"
-
     );
 
-    sizeValue.textContent = slider.value + " px";
+    sizeValue.textContent = slider.value + "px";
 
 });
 
 
-// ==========================
-// FULLSCREEN
-// ==========================
+// ===== FULLSCREEN =====
 
-fullscreenBtn.onclick = () => {
+fullscreenBtn.addEventListener("click", () => {
 
     if (!document.fullscreenElement) {
 
@@ -81,71 +43,56 @@ fullscreenBtn.onclick = () => {
 
     }
 
-};
+});
 
 
-// ==========================
-// START POSITION
-// ==========================
+// ===== SAVE START POSITION =====
 
-const startPosition = {
+const startPosition = [];
 
-    "blue-jgl": { left: 20, top: 80 },
-    "blue-mid": { left: 20, top: 160 },
-    "blue-farm": { left: 20, top: 240 },
-    "blue-clash": { left: 20, top: 320 },
-    "blue-roam": { left: 20, top: 400 },
+roles.forEach(role => {
 
-    "red-jgl": { right: 20, top: 80 },
-    "red-mid": { right: 20, top: 160 },
-    "red-farm": { right: 20, top: 240 },
-    "red-clash": { right: 20, top: 320 },
-    "red-roam": { right: 20, top: 400 }
+    startPosition.push({
 
-};
+        element: role,
+
+        parent: role.parentElement,
+        nextSibling: role.nextElementSibling
+
+    });
+
+});
 
 
-// ==========================
-// RESET
-// ==========================
+// ===== RESET =====
 
-function resetRoles() {
+resetBtn.addEventListener("click", () => {
 
-    roles.forEach(role => {
+    startPosition.forEach(item => {
 
-        role.style.position = "absolute";
+        item.element.style.position = "";
+        item.element.style.left = "";
+        item.element.style.top = "";
+        item.element.style.zIndex = "";
 
-        role.style.left = "";
-        role.style.right = "";
+        if (item.nextSibling) {
 
-        const pos = startPosition[role.id];
+            item.parent.insertBefore(item.element, item.nextSibling);
 
-        role.style.top = pos.top + "px";
+        } else {
 
-        if (pos.left !== undefined) {
-
-            role.style.left = pos.left + "px";
-
-        }
-
-        if (pos.right !== undefined) {
-
-            role.style.right = pos.right + "px";
+            item.parent.appendChild(item.element);
 
         }
 
     });
 
-}
-
-resetBtn.onclick = resetRoles;
+});
 
 
-// ==========================
-// DRAG SYSTEM
-// ==========================
+// ===== DRAG =====
 
-let activeRole = null;
+let active = null;
 
 let offsetX = 0;
 let offsetY = 0;
@@ -157,76 +104,81 @@ roles.forEach(role => {
 });
 
 
-function startDrag(e) {
+function startDrag(e){
 
-    activeRole = e.target;
+    active = e.target;
 
-    activeRole.setPointerCapture(e.pointerId);
-
-    const rect = activeRole.getBoundingClientRect();
+    const rect = active.getBoundingClientRect();
 
     offsetX = e.clientX - rect.left;
     offsetY = e.clientY - rect.top;
 
-    activeRole.style.zIndex = "9999";
+    board.appendChild(active);
+
+    active.style.position = "absolute";
+
+    active.style.left =
+        rect.left - board.getBoundingClientRect().left + "px";
+
+    active.style.top =
+        rect.top - board.getBoundingClientRect().top + "px";
+
+    active.style.zIndex = "999";
+
+    active.setPointerCapture(e.pointerId);
 
 }
 
 
-document.addEventListener("pointermove", dragMove);
+document.addEventListener("pointermove", drag);
 
-function dragMove(e) {
 
-    if (!activeRole) return;
+function drag(e){
+
+    if(!active) return;
 
     const boardRect = board.getBoundingClientRect();
 
     let x = e.clientX - boardRect.left - offsetX;
     let y = e.clientY - boardRect.top - offsetY;
 
-    const maxX = board.clientWidth - activeRole.offsetWidth;
-    const maxY = board.clientHeight - activeRole.offsetHeight;
+    x = Math.max(
+        0,
+        Math.min(
+            x,
+            board.clientWidth - active.offsetWidth
+        )
+    );
 
-    x = Math.max(0, Math.min(x, maxX));
-    y = Math.max(0, Math.min(y, maxY));
+    y = Math.max(
+        0,
+        Math.min(
+            y,
+            board.clientHeight - active.offsetHeight
+        )
+    );
 
-    activeRole.style.left = x + "px";
-    activeRole.style.top = y + "px";
-    activeRole.style.right = "auto";
+    active.style.left = x + "px";
+    active.style.top = y + "px";
 
 }
 
 
 document.addEventListener("pointerup", () => {
 
-    if (!activeRole) return;
+    if(!active) return;
 
-    activeRole.releasePointerCapture?.();
+    active.releasePointerCapture?.();
 
-    activeRole.style.zIndex = "10";
-
-    activeRole = null;
+    active = null;
 
 });
 
 
-// ==========================
-// DISABLE IMAGE DRAG
-// ==========================
+// ===== DISABLE IMAGE DRAG =====
 
-document.querySelectorAll("img").forEach(img => {
+document.querySelectorAll("img").forEach(img=>{
 
-    img.draggable = false;
+    img.draggable=false;
 
 });
-
-
-// ==========================
-// INIT
-// ==========================
-
-window.onload = () => {
-
-    resetRoles();
-
-};
