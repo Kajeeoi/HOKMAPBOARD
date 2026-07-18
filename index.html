@@ -2,134 +2,153 @@
 <html lang="id">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>HOK Strategy Board</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-    <!-- ========================= -->
-    <!-- TOOLBAR -->
-    <!-- ========================= -->
+    <!-- =========================
+         TOOLBAR
+    ========================== -->
 
     <header id="toolbar">
 
         <h1>HOK Strategy Board</h1>
 
-        <div id="toolbarMenu">
+        <div class="toolbar-right">
 
-            <label>
-                Icon Size
-            </label>
+            <div class="slider-group">
 
-            <input
-                id="sizeSlider"
-                type="range"
-                min="40"
-                max="100"
-                value="60">
+                <span>Icon</span>
 
-            <span id="sizeValue">
-                60px
-            </span>
+                <input
+                    type="range"
+                    id="sizeSlider"
+                    min="30"
+                    max="120"
+                    value="60">
+
+                <span id="sizeValue">
+                    60 px
+                </span>
+
+            </div>
 
             <button id="fullscreenBtn">
-                Fullscreen
+
+                ⛶ Fullscreen
+
             </button>
 
             <button id="resetBtn">
+
                 Reset
+
             </button>
 
         </div>
 
     </header>
 
-    <!-- ========================= -->
-    <!-- BOARD -->
-    <!-- ========================= -->
+    <!-- =========================
+         BOARD
+    ========================== -->
 
     <main id="board">
 
-        <!-- BLUE TEAM -->
-
-        <aside id="bluePanel">
-
-            <img id="blue-jgl"
-                class="role"
-                src="assets/junglerblue.png"
-                draggable="false">
-
-            <img id="blue-mid"
-                class="role"
-                src="assets/midblue.png"
-                draggable="false">
-
-            <img id="blue-farm"
-                class="role"
-                src="assets/farmblue.png"
-                draggable="false">
-
-            <img id="blue-clash"
-                class="role"
-                src="assets/clashblue.png"
-                draggable="false">
-
-            <img id="blue-roam"
-                class="role"
-                src="assets/roamblue.png"
-                draggable="false">
-
-        </aside>
-
         <!-- MAP -->
 
-        <section id="mapArea">
+        <img
+            id="map"
+            src="assets/map.png"
+            draggable="false"
+            alt="Honor of Kings Map">
 
-            <img
-                id="map"
-                src="assets/map.png"
-                draggable="false"
-                alt="Honor of Kings Map">
 
-        </section>
+        <!-- =====================
+             BLUE TEAM
+        ====================== -->
 
-        <!-- RED TEAM -->
+        <img
+            id="blue-jgl"
+            class="role"
+            src="assets/junglerblue.png"
+            draggable="false">
 
-        <aside id="redPanel">
+        <img
+            id="blue-mid"
+            class="role"
+            src="assets/midblue.png"
+            draggable="false">
 
-            <img id="red-jgl"
-                class="role"
-                src="assets/jungred.png"
-                draggable="false">
+        <img
+            id="blue-farm"
+            class="role"
+            src="assets/farmblue.png"
+            draggable="false">
 
-            <img id="red-mid"
-                class="role"
-                src="assets/midred.png"
-                draggable="false">
+        <img
+            id="blue-clash"
+            class="role"
+            src="assets/clashblue.png"
+            draggable="false">
 
-            <img id="red-farm"
-                class="role"
-                src="assets/farmred.png"
-                draggable="false">
+        <img
+            id="blue-roam"
+            class="role"
+            src="assets/roamblue.png"
+            draggable="false">
 
-            <img id="red-clash"
-                class="role"
-                src="assets/clashred.png"
-                draggable="false">
 
-            <img id="red-roam"
-                class="role"
-                src="assets/roamred.png"
-                draggable="false">
+        <!-- =====================
+             RED TEAM
+        ====================== -->
 
-        </aside>
+        <img
+            id="red-jgl"
+            class="role"
+            src="assets/jungred.png"
+            draggable="false">
+
+        <img
+            id="red-mid"
+            class="role"
+            src="assets/midred.png"
+            draggable="false">
+
+        <img
+            id="red-farm"
+            class="role"
+            src="assets/farmred.png"
+            draggable="false">
+
+        <img
+            id="red-clash"
+            class="role"
+            src="assets/clashred.png"
+            draggable="false">
+
+        <img
+            id="red-roam"
+            class="role"
+            src="assets/roamred.png"
+            draggable="false">
 
     </main>
+
+    <!-- =========================
+         SCRIPT
+    ========================== -->
 
     <script src="script.js"></script>
 
