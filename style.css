@@ -1,18 +1,26 @@
 /* ==========================================
-   HOK Strategy Board V1
+   HOK Strategy Board
+   Android TV Version
 ========================================== */
 
 :root{
 
-    --toolbar-height:70px;
     --role-size:60px;
 
-    --bg:#1e1e1e;
-    --toolbar:#171717;
-    --button:#2196F3;
-    --button-hover:#42A5F5;
+    --toolbar-height:70px;
+
+    --bg:#111827;
+
+    --toolbar:#1f2937;
+
+    --panel:#1e293b;
+
+    --button:#2563eb;
+
+    --button-hover:#3b82f6;
 
 }
+
 
 /* ==========================================
 RESET
@@ -21,7 +29,9 @@ RESET
 *{
 
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
 
 }
@@ -30,15 +40,17 @@ html,
 body{
 
     width:100%;
+
     height:100%;
 
     overflow:hidden;
 
-    background:var(--bg);
-
     font-family:Arial, Helvetica, sans-serif;
 
+    background:var(--bg);
+
 }
+
 
 /* ==========================================
 TOOLBAR
@@ -46,10 +58,11 @@ TOOLBAR
 
 #toolbar{
 
-    width:100%;
     height:var(--toolbar-height);
 
     background:var(--toolbar);
+
+    color:white;
 
     display:flex;
 
@@ -59,35 +72,32 @@ TOOLBAR
 
     padding:0 20px;
 
-    color:white;
-
-    border-bottom:1px solid #2f2f2f;
+    border-bottom:2px solid #374151;
 
 }
 
-.toolbar-left h1{
+#toolbar h1{
 
-    font-size:28px;
+    font-size:26px;
 
 }
 
-.toolbar-center{
+#toolbarMenu{
 
     display:flex;
 
     align-items:center;
 
-    gap:10px;
+    gap:15px;
 
 }
 
-.toolbar-right{
+#toolbar label{
 
-    display:flex;
-
-    gap:10px;
+    font-weight:bold;
 
 }
+
 
 /* ==========================================
 BUTTON
@@ -95,19 +105,21 @@ BUTTON
 
 button{
 
-    border:none;
-
     background:var(--button);
 
     color:white;
 
+    border:none;
+
     padding:10px 18px;
 
-    border-radius:10px;
+    border-radius:8px;
 
     cursor:pointer;
 
     transition:.2s;
+
+    font-size:15px;
 
     font-weight:bold;
 
@@ -119,13 +131,14 @@ button:hover{
 
 }
 
+
 /* ==========================================
 SLIDER
 ========================================== */
 
 #sizeSlider{
 
-    width:170px;
+    width:180px;
 
 }
 
@@ -135,7 +148,10 @@ SLIDER
 
     text-align:center;
 
+    color:white;
+
 }
+
 
 /* ==========================================
 BOARD
@@ -143,7 +159,7 @@ BOARD
 
 #board{
 
-    width:100%;
+    position:relative;
 
     height:calc(100vh - var(--toolbar-height));
 
@@ -153,24 +169,28 @@ BOARD
 
 }
 
+
 /* ==========================================
-PANEL
+BLUE & RED PANEL
 ========================================== */
 
 #bluePanel,
 #redPanel{
 
+    background:var(--panel);
+
     display:flex;
 
     flex-direction:column;
 
-    justify-content:center;
-
     align-items:center;
 
-    gap:18px;
+    justify-content:center;
+
+    gap:20px;
 
 }
+
 
 /* ==========================================
 MAP
@@ -184,43 +204,44 @@ MAP
 
     align-items:center;
 
-}
+    overflow:hidden;
 
-#mapWrapper{
-
-    position:relative;
-
-    width:90%;
-
-    max-width:950px;
+    background:#0f172a;
 
 }
 
 #map{
 
-    width:100%;
+    width:95%;
 
-    display:block;
+    max-height:95%;
+
+    object-fit:contain;
 
     user-select:none;
 
+    pointer-events:none;
+
 }
 
+
 /* ==========================================
-ICON
+ROLE
 ========================================== */
 
 .role{
 
     width:var(--role-size);
 
-    cursor:grab;
+    height:auto;
 
-    touch-action:none;
+    cursor:grab;
 
     user-select:none;
 
-    transition:.15s;
+    touch-action:none;
+
+    transition:transform .15s;
 
 }
 
@@ -236,160 +257,21 @@ ICON
 
 }
 
-/* ==========================================
-DESKTOP MODE
-========================================== */
-
-body.desktop #board{
-
-    grid-template-columns:120px 1fr 120px;
-
-}
-
-body.desktop #mapWrapper{
-
-    width:90%;
-
-}
 
 /* ==========================================
-TABLET MODE
+SCROLLBAR
 ========================================== */
 
-body.tablet{
+::-webkit-scrollbar{
 
-    --role-size:55px;
-
-}
-
-body.tablet #board{
-
-    grid-template-columns:90px 1fr 90px;
+    width:8px;
 
 }
 
-body.tablet #mapWrapper{
+::-webkit-scrollbar-thumb{
 
-    width:95%;
+    background:#475569;
 
-}
-
-/* ==========================================
-MOBILE MODE
-========================================== */
-
-body.mobile{
-
-    --role-size:50px;
-
-}
-
-body.mobile #board{
-
-    grid-template-columns:1fr;
-
-    grid-template-rows:auto auto auto;
-
-    gap:15px;
-
-    padding:15px;
-
-}
-
-body.mobile #bluePanel{
-
-    flex-direction:row;
-
-    justify-content:center;
-
-}
-
-body.mobile #redPanel{
-
-    flex-direction:row;
-
-    justify-content:center;
-
-}
-
-body.mobile #mapWrapper{
-
-    width:100%;
-
-}
-
-/* ==========================================
-AUTO RESPONSIVE
-========================================== */
-
-@media(max-width:768px){
-
-    #toolbar{
-
-        flex-wrap:wrap;
-
-        height:auto;
-
-        padding:10px;
-
-        gap:10px;
-
-    }
-
-    .toolbar-left{
-
-        width:100%;
-
-        text-align:center;
-
-    }
-
-    .toolbar-center{
-
-        width:100%;
-
-        justify-content:center;
-
-    }
-
-    .toolbar-right{
-
-        width:100%;
-
-        justify-content:center;
-
-        flex-wrap:wrap;
-
-    }
-
-    #board{
-
-        height:calc(100vh - 130px);
-
-    }
-
-}
-
-@media(max-width:480px){
-
-    .toolbar-left h1{
-
-        font-size:20px;
-
-    }
-
-    button{
-
-        font-size:12px;
-
-        padding:8px 12px;
-
-    }
-
-    #sizeSlider{
-
-        width:120px;
-
-    }
+    border-radius:20px;
 
 }
