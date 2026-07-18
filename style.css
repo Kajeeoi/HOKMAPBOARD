@@ -1,22 +1,32 @@
 /* ===========================================
-   HOK STRATEGY BOARD
-   FINAL V2
+   HOK STRATEGY BOARD V3
 =========================================== */
 
 :root{
 
     --role-size:60px;
 
+    --toolbar-height:70px;
+
+    --bg:#1f1f1f;
+
+    --toolbar:#181818;
+
+    --blue:#1b84ff;
+
 }
 
+
 /* ===========================================
-   RESET
+RESET
 =========================================== */
 
 *{
 
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
 
 }
@@ -25,11 +35,12 @@ html,
 body{
 
     width:100%;
+
     height:100%;
 
     overflow:hidden;
 
-    background:#111;
+    background:var(--bg);
 
     font-family:Arial,Helvetica,sans-serif;
 
@@ -37,7 +48,7 @@ body{
 
 
 /* ===========================================
-   TOOLBAR
+TOOLBAR
 =========================================== */
 
 #toolbar{
@@ -45,12 +56,14 @@ body{
     position:fixed;
 
     top:0;
+
     left:0;
 
     width:100%;
-    height:65px;
 
-    background:#1a1a1a;
+    height:var(--toolbar-height);
+
+    background:var(--toolbar);
 
     display:flex;
 
@@ -62,15 +75,17 @@ body{
 
     color:white;
 
-    z-index:99999;
+    z-index:9999;
 
-    border-bottom:1px solid #2d2d2d;
+    border-bottom:1px solid #2e2e2e;
 
 }
 
-#toolbar h1{
+.logo h1{
 
-    font-size:24px;
+    font-size:30px;
+
+    font-weight:bold;
 
 }
 
@@ -84,10 +99,6 @@ body{
 
 }
 
-/* ===========================================
-   SLIDER
-=========================================== */
-
 .slider-group{
 
     display:flex;
@@ -96,60 +107,41 @@ body{
 
     gap:10px;
 
-    color:white;
-
-    font-size:14px;
-
 }
 
 #sizeSlider{
 
     width:180px;
 
-    cursor:pointer;
-
 }
-
-#sizeValue{
-
-    width:50px;
-
-    text-align:center;
-
-}
-
-/* ===========================================
-   BUTTON
-=========================================== */
 
 button{
 
-    padding:10px 18px;
+    padding:12px 20px;
 
     border:none;
 
-    border-radius:10px;
+    border-radius:12px;
 
-    background:#2B8CFF;
+    background:#1990ff;
 
     color:white;
 
-    cursor:pointer;
-
     font-weight:bold;
 
-    transition:.2s;
+    cursor:pointer;
 
 }
 
 button:hover{
 
-    background:#4DA4FF;
+    background:#39a2ff;
 
 }
 
+
 /* ===========================================
-   BOARD
+BOARD
 =========================================== */
 
 #board{
@@ -158,21 +150,20 @@ button:hover{
 
     width:100vw;
 
-    height:calc(100vh - 65px);
+    height:calc(100vh - var(--toolbar-height));
 
-    margin-top:65px;
+    margin-top:var(--toolbar-height);
 
     overflow:hidden;
 
-    background:#202020;
-
 }
 
+
 /* ===========================================
-   MAP
+MAP
 =========================================== */
 
-#map{
+#mapWrapper{
 
     position:absolute;
 
@@ -182,20 +173,29 @@ button:hover{
 
     transform:translate(-50%,-50%);
 
-    width:95%;
+    width:min(80vw,1000px);
 
-    height:95%;
-
-    object-fit:contain;
-
-    pointer-events:none;
-
-    user-select:none;
+    aspect-ratio:1/1;
 
 }
 
+#map{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+
+    user-select:none;
+
+    pointer-events:none;
+
+}
+
+
 /* ===========================================
-   ROLE
+ROLE
 =========================================== */
 
 .role{
@@ -208,15 +208,9 @@ button:hover{
 
     touch-action:none;
 
-    user-select:none;
-
-    -webkit-user-drag:none;
+    transition:.15s;
 
     z-index:10;
-
-    transition:
-        transform .12s ease,
-        filter .12s ease;
 
 }
 
@@ -230,49 +224,93 @@ button:hover{
 
     cursor:grabbing;
 
+    transform:scale(1.15);
+
 }
+
 
 /* ===========================================
-   RESPONSIVE
+DESKTOP TEAM
 =========================================== */
 
-@media(max-width:1000px){
+#blueTeam,
+#redTeam{
 
-    #toolbar h1{
+    position:absolute;
 
-        font-size:20px;
+    top:50%;
 
-    }
+    transform:translateY(-50%);
 
-    #sizeSlider{
+    display:flex;
 
-        width:120px;
+    flex-direction:column;
+
+    gap:25px;
+
+}
+
+#blueTeam{
+
+    left:30px;
+
+}
+
+#redTeam{
+
+    right:30px;
+
+}
+
+
+/* ===========================================
+TABLET
+=========================================== */
+
+@media(max-width:1024px){
+
+    #mapWrapper{
+
+        width:88vw;
 
     }
 
 }
 
-@media(max-width:700px){
+
+/* ===========================================
+PHONE
+=========================================== */
+
+@media(max-width:768px){
+
+    :root{
+
+        --role-size:55px;
+
+        --toolbar-height:90px;
+
+    }
+
+    body{
+
+        overflow:hidden;
+
+    }
 
     #toolbar{
 
+        flex-direction:column;
+
+        justify-content:center;
+
+        gap:8px;
+
         padding:10px;
 
-        height:70px;
-
-        flex-wrap:wrap;
-
     }
 
-    #board{
-
-        margin-top:70px;
-
-        height:calc(100vh - 70px);
-
-    }
-
-    #toolbar h1{
+    .logo h1{
 
         font-size:18px;
 
@@ -280,21 +318,96 @@ button:hover{
 
     .toolbar-right{
 
-        gap:8px;
+        width:100%;
+
+        justify-content:space-between;
+
+    }
+
+    .slider-group{
+
+        flex:1;
 
     }
 
     #sizeSlider{
 
-        width:90px;
+        width:100%;
 
     }
 
     button{
 
-        padding:8px 12px;
+        padding:10px 12px;
 
-        font-size:12px;
+        font-size:13px;
+
+    }
+
+    #board{
+
+        margin-top:90px;
+
+        height:calc(100vh - 90px);
+
+    }
+
+    #mapWrapper{
+
+        width:95vw;
+
+        top:55%;
+
+    }
+
+    #blueTeam{
+
+        left:8px;
+
+        gap:18px;
+
+    }
+
+    #redTeam{
+
+        right:8px;
+
+        gap:18px;
+
+    }
+
+}
+
+
+/* ===========================================
+LANDSCAPE PHONE
+=========================================== */
+
+@media (max-height:500px){
+
+    :root{
+
+        --toolbar-height:65px;
+
+        --role-size:52px;
+
+    }
+
+    #toolbar{
+
+        flex-direction:row;
+
+    }
+
+    .logo h1{
+
+        font-size:16px;
+
+    }
+
+    #mapWrapper{
+
+        width:65vw;
 
     }
 
