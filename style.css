@@ -1,18 +1,20 @@
 /* ===========================================
-   HOK STRATEGY BOARD V3
+   HOK STRATEGY BOARD V4
 =========================================== */
 
 :root{
 
-    --role-size:60px;
-
     --toolbar-height:70px;
+
+    --role-size:60px;
 
     --bg:#1f1f1f;
 
     --toolbar:#181818;
 
-    --blue:#1b84ff;
+    --panel:#222;
+
+    --blue:#2B8CFF;
 
 }
 
@@ -67,25 +69,31 @@ TOOLBAR
 
     display:flex;
 
-    justify-content:space-between;
-
     align-items:center;
+
+    justify-content:space-between;
 
     padding:0 20px;
 
+    z-index:99999;
+
     color:white;
 
-    z-index:9999;
-
-    border-bottom:1px solid #2e2e2e;
+    border-bottom:1px solid #333;
 
 }
 
 .logo h1{
 
-    font-size:30px;
+    font-size:24px;
 
-    font-weight:bold;
+}
+
+.toolbar-center{
+
+    display:flex;
+
+    align-items:center;
 
 }
 
@@ -95,7 +103,7 @@ TOOLBAR
 
     align-items:center;
 
-    gap:15px;
+    gap:12px;
 
 }
 
@@ -105,37 +113,60 @@ TOOLBAR
 
     align-items:center;
 
-    gap:10px;
+    gap:8px;
 
 }
 
 #sizeSlider{
 
-    width:180px;
+    width:170px;
 
 }
 
-button{
+#sizeValue{
 
-    padding:12px 20px;
+    width:55px;
+
+    text-align:center;
+
+}
+
+
+/* ===========================================
+BUTTON
+=========================================== */
+
+button{
 
     border:none;
 
-    border-radius:12px;
+    border-radius:10px;
 
-    background:#1990ff;
+    background:var(--blue);
 
     color:white;
 
-    font-weight:bold;
+    padding:10px 15px;
 
     cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.2s;
 
 }
 
 button:hover{
 
-    background:#39a2ff;
+    filter:brightness(1.15);
+
+}
+
+.view-mode{
+
+    display:flex;
+
+    gap:8px;
 
 }
 
@@ -148,13 +179,39 @@ BOARD
 
     position:relative;
 
+    margin-top:var(--toolbar-height);
+
     width:100vw;
 
     height:calc(100vh - var(--toolbar-height));
 
-    margin-top:var(--toolbar-height);
+    display:grid;
 
-    overflow:hidden;
+    grid-template-columns:120px 1fr 120px;
+
+    align-items:center;
+
+}
+
+
+/* ===========================================
+PANELS
+=========================================== */
+
+#bluePanel,
+#redPanel{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    height:100%;
 
 }
 
@@ -163,17 +220,25 @@ BOARD
 MAP
 =========================================== */
 
+#mapArea{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:100%;
+
+    height:100%;
+
+}
+
 #mapWrapper{
 
-    position:absolute;
+    position:relative;
 
-    left:50%;
-
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    width:min(80vw,1000px);
+    width:min(90%,900px);
 
     aspect-ratio:1/1;
 
@@ -187,9 +252,9 @@ MAP
 
     object-fit:contain;
 
-    user-select:none;
-
     pointer-events:none;
+
+    user-select:none;
 
 }
 
@@ -200,8 +265,6 @@ ROLE
 
 .role{
 
-    position:absolute;
-
     width:var(--role-size);
 
     cursor:grab;
@@ -210,7 +273,9 @@ ROLE
 
     transition:.15s;
 
-    z-index:10;
+    user-select:none;
+
+    -webkit-user-drag:none;
 
 }
 
@@ -230,89 +295,134 @@ ROLE
 
 
 /* ===========================================
-DESKTOP TEAM
+FLOATING TOOLS
 =========================================== */
 
-#blueTeam,
-#redTeam{
+#floatingTools{
 
-    position:absolute;
+    position:fixed;
 
-    top:50%;
+    bottom:20px;
 
-    transform:translateY(-50%);
+    right:20px;
 
     display:flex;
 
     flex-direction:column;
 
-    gap:25px;
+    gap:10px;
 
-}
-
-#blueTeam{
-
-    left:30px;
-
-}
-
-#redTeam{
-
-    right:30px;
+    z-index:9999;
 
 }
 
 
 /* ===========================================
-TABLET
+DESKTOP MODE
 =========================================== */
 
-@media(max-width:1024px){
+body.desktop #board{
 
-    #mapWrapper{
+    grid-template-columns:120px 1fr 120px;
 
-        width:88vw;
+}
 
-    }
+body.desktop #mapWrapper{
+
+    width:min(90%,900px);
 
 }
 
 
 /* ===========================================
-PHONE
+TABLET MODE
+=========================================== */
+
+body.tablet #board{
+
+    grid-template-columns:90px 1fr 90px;
+
+}
+
+body.tablet #mapWrapper{
+
+    width:95%;
+
+}
+
+body.tablet{
+
+    --role-size:55px;
+
+}
+
+
+/* ===========================================
+MOBILE MODE
+=========================================== */
+
+body.mobile #board{
+
+    grid-template-columns:1fr;
+
+    grid-template-rows:auto auto auto;
+
+    row-gap:15px;
+
+}
+
+body.mobile #bluePanel{
+
+    flex-direction:row;
+
+    justify-content:center;
+
+}
+
+body.mobile #redPanel{
+
+    flex-direction:row;
+
+    justify-content:center;
+
+}
+
+body.mobile #mapWrapper{
+
+    width:95vw;
+
+}
+
+body.mobile{
+
+    --role-size:52px;
+
+}
+
+
+/* ===========================================
+RESPONSIVE
 =========================================== */
 
 @media(max-width:768px){
 
-    :root{
-
-        --role-size:55px;
-
-        --toolbar-height:90px;
-
-    }
-
-    body{
-
-        overflow:hidden;
-
-    }
-
     #toolbar{
 
-        flex-direction:column;
+        flex-wrap:wrap;
 
-        justify-content:center;
-
-        gap:8px;
+        height:auto;
 
         padding:10px;
 
+        gap:10px;
+
     }
 
-    .logo h1{
+    .toolbar-center{
 
-        font-size:18px;
+        width:100%;
+
+        justify-content:center;
 
     }
 
@@ -320,94 +430,49 @@ PHONE
 
         width:100%;
 
-        justify-content:space-between;
+        justify-content:center;
 
-    }
-
-    .slider-group{
-
-        flex:1;
-
-    }
-
-    #sizeSlider{
-
-        width:100%;
-
-    }
-
-    button{
-
-        padding:10px 12px;
-
-        font-size:13px;
+        flex-wrap:wrap;
 
     }
 
     #board{
 
-        margin-top:90px;
+        margin-top:120px;
 
-        height:calc(100vh - 90px);
-
-    }
-
-    #mapWrapper{
-
-        width:95vw;
-
-        top:55%;
+        height:calc(100vh - 120px);
 
     }
 
-    #blueTeam{
+    #floatingTools{
 
-        left:8px;
+        bottom:10px;
 
-        gap:18px;
-
-    }
-
-    #redTeam{
-
-        right:8px;
-
-        gap:18px;
+        right:10px;
 
     }
 
 }
 
-
-/* ===========================================
-LANDSCAPE PHONE
-=========================================== */
-
-@media (max-height:500px){
-
-    :root{
-
-        --toolbar-height:65px;
-
-        --role-size:52px;
-
-    }
-
-    #toolbar{
-
-        flex-direction:row;
-
-    }
+@media(max-width:480px){
 
     .logo h1{
 
-        font-size:16px;
+        font-size:18px;
 
     }
 
-    #mapWrapper{
+    button{
 
-        width:65vw;
+        padding:8px 10px;
+
+        font-size:12px;
+
+    }
+
+    #sizeSlider{
+
+        width:110px;
 
     }
 
