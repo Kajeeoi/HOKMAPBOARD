@@ -5,8 +5,7 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
+    <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
     <title>HOK Strategy Board</title>
@@ -17,71 +16,57 @@
 
 <body class="desktop">
 
-    <!-- ==========================
-         TOOLBAR
-    =========================== -->
+    <!-- ================================= -->
+    <!-- TOOLBAR -->
+    <!-- ================================= -->
 
     <header id="toolbar">
 
-        <div class="logo">
+        <div class="toolbar-left">
 
             <h1>HOK Strategy Board</h1>
 
         </div>
 
-
         <div class="toolbar-center">
 
-            <div class="slider-group">
+            <label for="sizeSlider">
+                Icon
+            </label>
 
-                <span>Icon</span>
+            <input
+                id="sizeSlider"
+                type="range"
+                min="40"
+                max="100"
+                value="60">
 
-                <input
-                    type="range"
-                    id="sizeSlider"
-                    min="40"
-                    max="100"
-                    value="60">
-
-                <span id="sizeValue">
-
-                    60 px
-
-                </span>
-
-            </div>
+            <span id="sizeValue">
+                60 px
+            </span>
 
         </div>
 
-
         <div class="toolbar-right">
 
-            <div class="view-mode">
+            <button id="desktopMode">
+                🖥 Desktop
+            </button>
 
-                <button id="desktopMode">
-                    🖥 Desktop
-                </button>
+            <button id="tabletMode">
+                📟 Tablet
+            </button>
 
-                <button id="tabletMode">
-                    📟 Tablet
-                </button>
-
-                <button id="mobileMode">
-                    📱 Mobile
-                </button>
-
-            </div>
+            <button id="mobileMode">
+                📱 Mobile
+            </button>
 
             <button id="fullscreenBtn">
-
                 ⛶ Fullscreen
-
             </button>
 
             <button id="resetBtn">
-
                 Reset
-
             </button>
 
         </div>
@@ -89,17 +74,13 @@
     </header>
 
 
-
-    <!-- ==========================
-         BOARD
-    =========================== -->
+    <!-- ================================= -->
+    <!-- BOARD -->
+    <!-- ================================= -->
 
     <main id="board">
 
-
-        <!-- ==========================
-             BLUE PANEL
-        =========================== -->
+        <!-- BLUE TEAM -->
 
         <aside id="bluePanel">
 
@@ -137,9 +118,7 @@
 
 
 
-        <!-- ==========================
-             MAP
-        =========================== -->
+        <!-- MAP -->
 
         <section id="mapArea">
 
@@ -148,7 +127,8 @@
                 <img
                     id="map"
                     src="assets/map.png"
-                    draggable="false">
+                    draggable="false"
+                    alt="Honor of Kings Map">
 
             </div>
 
@@ -156,9 +136,7 @@
 
 
 
-        <!-- ==========================
-             RED PANEL
-        =========================== -->
+        <!-- RED TEAM -->
 
         <aside id="redPanel">
 
@@ -195,40 +173,6 @@
         </aside>
 
     </main>
-
-
-
-    <!-- ==========================
-         FUTURE TOOLBAR
-    =========================== -->
-
-    <div id="floatingTools">
-
-        <button id="drawBtn">
-
-            ✏ Draw
-
-        </button>
-
-        <button id="pingBtn">
-
-            📍 Ping
-
-        </button>
-
-        <button id="saveBtn">
-
-            💾 Save
-
-        </button>
-
-        <button id="clearBtn">
-
-            🗑 Clear
-
-        </button>
-
-    </div>
 
 
     <script src="script.js"></script>
