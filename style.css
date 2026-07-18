@@ -1,34 +1,27 @@
-/* ===========================================
-   HOK STRATEGY BOARD V4
-=========================================== */
+/* ==========================================
+   HOK Strategy Board V1
+========================================== */
 
 :root{
 
     --toolbar-height:70px;
-
     --role-size:60px;
 
-    --bg:#1f1f1f;
-
-    --toolbar:#181818;
-
-    --panel:#222;
-
-    --blue:#2B8CFF;
+    --bg:#1e1e1e;
+    --toolbar:#171717;
+    --button:#2196F3;
+    --button-hover:#42A5F5;
 
 }
 
-
-/* ===========================================
+/* ==========================================
 RESET
-=========================================== */
+========================================== */
 
 *{
 
     margin:0;
-
     padding:0;
-
     box-sizing:border-box;
 
 }
@@ -37,32 +30,23 @@ html,
 body{
 
     width:100%;
-
     height:100%;
 
     overflow:hidden;
 
     background:var(--bg);
 
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 
 }
 
-
-/* ===========================================
+/* ==========================================
 TOOLBAR
-=========================================== */
+========================================== */
 
 #toolbar{
 
-    position:fixed;
-
-    top:0;
-
-    left:0;
-
     width:100%;
-
     height:var(--toolbar-height);
 
     background:var(--toolbar);
@@ -75,17 +59,15 @@ TOOLBAR
 
     padding:0 20px;
 
-    z-index:99999;
-
     color:white;
 
-    border-bottom:1px solid #333;
+    border-bottom:1px solid #2f2f2f;
 
 }
 
-.logo h1{
+.toolbar-left h1{
 
-    font-size:24px;
+    font-size:28px;
 
 }
 
@@ -95,27 +77,51 @@ TOOLBAR
 
     align-items:center;
 
+    gap:10px;
+
 }
 
 .toolbar-right{
 
     display:flex;
 
-    align-items:center;
-
-    gap:12px;
+    gap:10px;
 
 }
 
-.slider-group{
+/* ==========================================
+BUTTON
+========================================== */
 
-    display:flex;
+button{
 
-    align-items:center;
+    border:none;
 
-    gap:8px;
+    background:var(--button);
+
+    color:white;
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    font-weight:bold;
 
 }
+
+button:hover{
+
+    background:var(--button-hover);
+
+}
+
+/* ==========================================
+SLIDER
+========================================== */
 
 #sizeSlider{
 
@@ -131,57 +137,13 @@ TOOLBAR
 
 }
 
-
-/* ===========================================
-BUTTON
-=========================================== */
-
-button{
-
-    border:none;
-
-    border-radius:10px;
-
-    background:var(--blue);
-
-    color:white;
-
-    padding:10px 15px;
-
-    cursor:pointer;
-
-    font-weight:bold;
-
-    transition:.2s;
-
-}
-
-button:hover{
-
-    filter:brightness(1.15);
-
-}
-
-.view-mode{
-
-    display:flex;
-
-    gap:8px;
-
-}
-
-
-/* ===========================================
+/* ==========================================
 BOARD
-=========================================== */
+========================================== */
 
 #board{
 
-    position:relative;
-
-    margin-top:var(--toolbar-height);
-
-    width:100vw;
+    width:100%;
 
     height:calc(100vh - var(--toolbar-height));
 
@@ -189,14 +151,11 @@ BOARD
 
     grid-template-columns:120px 1fr 120px;
 
-    align-items:center;
-
 }
 
-
-/* ===========================================
-PANELS
-=========================================== */
+/* ==========================================
+PANEL
+========================================== */
 
 #bluePanel,
 #redPanel{
@@ -209,16 +168,13 @@ PANELS
 
     align-items:center;
 
-    gap:20px;
-
-    height:100%;
+    gap:18px;
 
 }
 
-
-/* ===========================================
+/* ==========================================
 MAP
-=========================================== */
+========================================== */
 
 #mapArea{
 
@@ -228,19 +184,15 @@ MAP
 
     align-items:center;
 
-    width:100%;
-
-    height:100%;
-
 }
 
 #mapWrapper{
 
     position:relative;
 
-    width:min(90%,900px);
+    width:90%;
 
-    aspect-ratio:1/1;
+    max-width:950px;
 
 }
 
@@ -248,20 +200,15 @@ MAP
 
     width:100%;
 
-    height:100%;
-
-    object-fit:contain;
-
-    pointer-events:none;
+    display:block;
 
     user-select:none;
 
 }
 
-
-/* ===========================================
-ROLE
-=========================================== */
+/* ==========================================
+ICON
+========================================== */
 
 .role{
 
@@ -271,11 +218,9 @@ ROLE
 
     touch-action:none;
 
-    transition:.15s;
-
     user-select:none;
 
-    -webkit-user-drag:none;
+    transition:.15s;
 
 }
 
@@ -289,37 +234,11 @@ ROLE
 
     cursor:grabbing;
 
-    transform:scale(1.15);
-
 }
 
-
-/* ===========================================
-FLOATING TOOLS
-=========================================== */
-
-#floatingTools{
-
-    position:fixed;
-
-    bottom:20px;
-
-    right:20px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:10px;
-
-    z-index:9999;
-
-}
-
-
-/* ===========================================
+/* ==========================================
 DESKTOP MODE
-=========================================== */
+========================================== */
 
 body.desktop #board{
 
@@ -329,14 +248,19 @@ body.desktop #board{
 
 body.desktop #mapWrapper{
 
-    width:min(90%,900px);
+    width:90%;
 
 }
 
-
-/* ===========================================
+/* ==========================================
 TABLET MODE
-=========================================== */
+========================================== */
+
+body.tablet{
+
+    --role-size:55px;
+
+}
 
 body.tablet #board{
 
@@ -350,16 +274,15 @@ body.tablet #mapWrapper{
 
 }
 
-body.tablet{
+/* ==========================================
+MOBILE MODE
+========================================== */
 
-    --role-size:55px;
+body.mobile{
+
+    --role-size:50px;
 
 }
-
-
-/* ===========================================
-MOBILE MODE
-=========================================== */
 
 body.mobile #board{
 
@@ -367,7 +290,9 @@ body.mobile #board{
 
     grid-template-rows:auto auto auto;
 
-    row-gap:15px;
+    gap:15px;
+
+    padding:15px;
 
 }
 
@@ -389,20 +314,13 @@ body.mobile #redPanel{
 
 body.mobile #mapWrapper{
 
-    width:95vw;
+    width:100%;
 
 }
 
-body.mobile{
-
-    --role-size:52px;
-
-}
-
-
-/* ===========================================
-RESPONSIVE
-=========================================== */
+/* ==========================================
+AUTO RESPONSIVE
+========================================== */
 
 @media(max-width:768px){
 
@@ -415,6 +333,14 @@ RESPONSIVE
         padding:10px;
 
         gap:10px;
+
+    }
+
+    .toolbar-left{
+
+        width:100%;
+
+        text-align:center;
 
     }
 
@@ -438,17 +364,7 @@ RESPONSIVE
 
     #board{
 
-        margin-top:120px;
-
-        height:calc(100vh - 120px);
-
-    }
-
-    #floatingTools{
-
-        bottom:10px;
-
-        right:10px;
+        height:calc(100vh - 130px);
 
     }
 
@@ -456,23 +372,23 @@ RESPONSIVE
 
 @media(max-width:480px){
 
-    .logo h1{
+    .toolbar-left h1{
 
-        font-size:18px;
+        font-size:20px;
 
     }
 
     button{
 
-        padding:8px 10px;
-
         font-size:12px;
+
+        padding:8px 12px;
 
     }
 
     #sizeSlider{
 
-        width:110px;
+        width:120px;
 
     }
 
