@@ -1,99 +1,163 @@
 // ==========================================
-// HOK Strategy Board V4
+// HOK Strategy Board V1
 // ==========================================
 
-// ---------- ELEMENT ----------
+// ==========================
+// ELEMENT
+// ==========================
+
 const body = document.body;
 
 const board = document.getElementById("board");
 
 const roles = document.querySelectorAll(".role");
 
-const resetBtn = document.getElementById("resetBtn");
-const fullscreenBtn = document.getElementById("fullscreenBtn");
+const slider = document.getElementById("sizeSlider");
+const sizeValue = document.getElementById("sizeValue");
 
 const desktopBtn = document.getElementById("desktopMode");
 const tabletBtn = document.getElementById("tabletMode");
 const mobileBtn = document.getElementById("mobileMode");
 
-const slider = document.getElementById("sizeSlider");
-const sizeValue = document.getElementById("sizeValue");
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+const resetBtn = document.getElementById("resetBtn");
 
 
-// ==========================================
+// ==========================
 // VIEW MODE
-// ==========================================
+// ==========================
 
-function setMode(mode){
+desktopBtn.onclick = () => {
 
-    body.classList.remove("desktop");
-    body.classList.remove("tablet");
-    body.classList.remove("mobile");
+    body.className = "desktop";
 
-    body.classList.add(mode);
+};
 
-}
+tabletBtn.onclick = () => {
 
-desktopBtn.onclick = ()=>setMode("desktop");
+    body.className = "tablet";
 
-tabletBtn.onclick = ()=>setMode("tablet");
+};
 
-mobileBtn.onclick = ()=>setMode("mobile");
+mobileBtn.onclick = () => {
+
+    body.className = "mobile";
+
+};
 
 
-// ==========================================
+// ==========================
 // ICON SIZE
-// ==========================================
+// ==========================
 
-slider.addEventListener("input",()=>{
+slider.addEventListener("input", () => {
 
     document.documentElement.style.setProperty(
 
         "--role-size",
 
-        slider.value+"px"
+        slider.value + "px"
 
     );
 
-    sizeValue.textContent = slider.value+" px";
+    sizeValue.textContent = slider.value + " px";
 
 });
 
 
-// ==========================================
+// ==========================
 // FULLSCREEN
-// ==========================================
+// ==========================
 
-fullscreenBtn.onclick = ()=>{
+fullscreenBtn.onclick = () => {
 
-    if(!document.fullscreenElement){
+    if (!document.fullscreenElement) {
 
         document.documentElement.requestFullscreen();
 
-    }else{
+    } else {
 
         document.exitFullscreen();
 
     }
 
 };
-// ==========================================
+
+
+// ==========================
+// START POSITION
+// ==========================
+
+const startPosition = {
+
+    "blue-jgl": { left: 20, top: 80 },
+    "blue-mid": { left: 20, top: 160 },
+    "blue-farm": { left: 20, top: 240 },
+    "blue-clash": { left: 20, top: 320 },
+    "blue-roam": { left: 20, top: 400 },
+
+    "red-jgl": { right: 20, top: 80 },
+    "red-mid": { right: 20, top: 160 },
+    "red-farm": { right: 20, top: 240 },
+    "red-clash": { right: 20, top: 320 },
+    "red-roam": { right: 20, top: 400 }
+
+};
+
+
+// ==========================
+// RESET
+// ==========================
+
+function resetRoles() {
+
+    roles.forEach(role => {
+
+        role.style.position = "absolute";
+
+        role.style.left = "";
+        role.style.right = "";
+
+        const pos = startPosition[role.id];
+
+        role.style.top = pos.top + "px";
+
+        if (pos.left !== undefined) {
+
+            role.style.left = pos.left + "px";
+
+        }
+
+        if (pos.right !== undefined) {
+
+            role.style.right = pos.right + "px";
+
+        }
+
+    });
+
+}
+
+resetBtn.onclick = resetRoles;
+
+
+// ==========================
 // DRAG SYSTEM
-// ==========================================
+// ==========================
 
 let activeRole = null;
 
 let offsetX = 0;
 let offsetY = 0;
 
-roles.forEach(role=>{
+roles.forEach(role => {
 
-    role.addEventListener("pointerdown",dragStart);
+    role.addEventListener("pointerdown", startDrag);
 
 });
 
 
-function dragStart(e){
+function startDrag(e) {
 
     activeRole = e.target;
 
@@ -104,139 +168,65 @@ function dragStart(e){
     offsetX = e.clientX - rect.left;
     offsetY = e.clientY - rect.top;
 
-    activeRole.style.zIndex = 9999;
+    activeRole.style.zIndex = "9999";
 
 }
 
 
-document.addEventListener("pointermove",dragMove);
+document.addEventListener("pointermove", dragMove);
 
-function dragMove(e){
+function dragMove(e) {
 
-    if(!activeRole) return;
+    if (!activeRole) return;
 
     const boardRect = board.getBoundingClientRect();
 
-    let x = e.clientX-boardRect.left-offsetX;
-    let y = e.clientY-boardRect.top-offsetY;
+    let x = e.clientX - boardRect.left - offsetX;
+    let y = e.clientY - boardRect.top - offsetY;
 
-    x = Math.max(0,Math.min(x,board.clientWidth-activeRole.offsetWidth));
+    const maxX = board.clientWidth - activeRole.offsetWidth;
+    const maxY = board.clientHeight - activeRole.offsetHeight;
 
-    y = Math.max(0,Math.min(y,board.clientHeight-activeRole.offsetHeight));
+    x = Math.max(0, Math.min(x, maxX));
+    y = Math.max(0, Math.min(y, maxY));
 
-    activeRole.style.position="absolute";
-
-    activeRole.style.left=x+"px";
-
-    activeRole.style.top=y+"px";
-
-}
-
-
-document.addEventListener("pointerup",()=>{
-
-    if(!activeRole) return;
-
-    activeRole.style.zIndex=10;
-
-    activeRole=null;
-
-});
-
-// ==========================================
-// RESET
-// ==========================================
-
-function resetIcons(){
-
-    const blue = [
-
-        "blue-jgl",
-        "blue-mid",
-        "blue-farm",
-        "blue-clash",
-        "blue-roam"
-
-    ];
-
-    const red = [
-
-        "red-jgl",
-        "red-mid",
-        "red-farm",
-        "red-clash",
-        "red-roam"
-
-    ];
-
-    blue.forEach(id=>{
-
-        const icon=document.getElementById(id);
-
-        icon.removeAttribute("style");
-
-    });
-
-    red.forEach(id=>{
-
-        const icon=document.getElementById(id);
-
-        icon.removeAttribute("style");
-
-    });
+    activeRole.style.left = x + "px";
+    activeRole.style.top = y + "px";
+    activeRole.style.right = "auto";
 
 }
 
-resetBtn.onclick = resetIcons;
 
-window.onload = resetIcons;
+document.addEventListener("pointerup", () => {
 
-// ==========================================
-// SHORTCUT
-// ==========================================
+    if (!activeRole) return;
 
-document.addEventListener("keydown",(e)=>{
+    activeRole.releasePointerCapture?.();
 
-    switch(e.key.toLowerCase()){
+    activeRole.style.zIndex = "10";
 
-        case "f":
-
-            fullscreenBtn.click();
-
-            break;
-
-        case "r":
-
-            resetBtn.click();
-
-            break;
-
-        case "1":
-
-            desktopBtn.click();
-
-            break;
-
-        case "2":
-
-            tabletBtn.click();
-
-            break;
-
-        case "3":
-
-            mobileBtn.click();
-
-            break;
-
-    }
+    activeRole = null;
 
 });
 
 
-// Disable Browser Drag
-document.querySelectorAll("img").forEach(img=>{
+// ==========================
+// DISABLE IMAGE DRAG
+// ==========================
 
-    img.draggable=false;
+document.querySelectorAll("img").forEach(img => {
+
+    img.draggable = false;
 
 });
+
+
+// ==========================
+// INIT
+// ==========================
+
+window.onload = () => {
+
+    resetRoles();
+
+};
