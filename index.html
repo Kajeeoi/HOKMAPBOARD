@@ -15,17 +15,22 @@
 
 </head>
 
-<body>
+<body class="desktop">
 
-    <!-- =========================
+    <!-- ==========================
          TOOLBAR
-    ========================== -->
+    =========================== -->
 
     <header id="toolbar">
 
-        <h1>HOK Strategy Board</h1>
+        <div class="logo">
 
-        <div class="toolbar-right">
+            <h1>HOK Strategy Board</h1>
+
+        </div>
+
+
+        <div class="toolbar-center">
 
             <div class="slider-group">
 
@@ -34,13 +39,36 @@
                 <input
                     type="range"
                     id="sizeSlider"
-                    min="30"
-                    max="120"
+                    min="40"
+                    max="100"
                     value="60">
 
                 <span id="sizeValue">
+
                     60 px
+
                 </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="toolbar-right">
+
+            <div class="view-mode">
+
+                <button id="desktopMode">
+                    🖥 Desktop
+                </button>
+
+                <button id="tabletMode">
+                    📟 Tablet
+                </button>
+
+                <button id="mobileMode">
+                    📱 Mobile
+                </button>
 
             </div>
 
@@ -60,95 +88,148 @@
 
     </header>
 
-    <!-- =========================
+
+
+    <!-- ==========================
          BOARD
-    ========================== -->
+    =========================== -->
 
     <main id="board">
 
-        <!-- MAP -->
 
-        <img
-            id="map"
-            src="assets/map.png"
-            draggable="false"
-            alt="Honor of Kings Map">
+        <!-- ==========================
+             BLUE PANEL
+        =========================== -->
 
+        <aside id="bluePanel">
 
-        <!-- =====================
-             BLUE TEAM
-        ====================== -->
+            <img
+                id="blue-jgl"
+                class="role"
+                src="assets/junglerblue.png"
+                draggable="false">
 
-        <img
-            id="blue-jgl"
-            class="role"
-            src="assets/junglerblue.png"
-            draggable="false">
+            <img
+                id="blue-mid"
+                class="role"
+                src="assets/midblue.png"
+                draggable="false">
 
-        <img
-            id="blue-mid"
-            class="role"
-            src="assets/midblue.png"
-            draggable="false">
+            <img
+                id="blue-farm"
+                class="role"
+                src="assets/farmblue.png"
+                draggable="false">
 
-        <img
-            id="blue-farm"
-            class="role"
-            src="assets/farmblue.png"
-            draggable="false">
+            <img
+                id="blue-clash"
+                class="role"
+                src="assets/clashblue.png"
+                draggable="false">
 
-        <img
-            id="blue-clash"
-            class="role"
-            src="assets/clashblue.png"
-            draggable="false">
+            <img
+                id="blue-roam"
+                class="role"
+                src="assets/roamblue.png"
+                draggable="false">
 
-        <img
-            id="blue-roam"
-            class="role"
-            src="assets/roamblue.png"
-            draggable="false">
+        </aside>
 
 
-        <!-- =====================
-             RED TEAM
-        ====================== -->
 
-        <img
-            id="red-jgl"
-            class="role"
-            src="assets/jungred.png"
-            draggable="false">
+        <!-- ==========================
+             MAP
+        =========================== -->
 
-        <img
-            id="red-mid"
-            class="role"
-            src="assets/midred.png"
-            draggable="false">
+        <section id="mapArea">
 
-        <img
-            id="red-farm"
-            class="role"
-            src="assets/farmred.png"
-            draggable="false">
+            <div id="mapWrapper">
 
-        <img
-            id="red-clash"
-            class="role"
-            src="assets/clashred.png"
-            draggable="false">
+                <img
+                    id="map"
+                    src="assets/map.png"
+                    draggable="false">
 
-        <img
-            id="red-roam"
-            class="role"
-            src="assets/roamred.png"
-            draggable="false">
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================
+             RED PANEL
+        =========================== -->
+
+        <aside id="redPanel">
+
+            <img
+                id="red-jgl"
+                class="role"
+                src="assets/jungred.png"
+                draggable="false">
+
+            <img
+                id="red-mid"
+                class="role"
+                src="assets/midred.png"
+                draggable="false">
+
+            <img
+                id="red-farm"
+                class="role"
+                src="assets/farmred.png"
+                draggable="false">
+
+            <img
+                id="red-clash"
+                class="role"
+                src="assets/clashred.png"
+                draggable="false">
+
+            <img
+                id="red-roam"
+                class="role"
+                src="assets/roamred.png"
+                draggable="false">
+
+        </aside>
 
     </main>
 
-    <!-- =========================
-         SCRIPT
-    ========================== -->
+
+
+    <!-- ==========================
+         FUTURE TOOLBAR
+    =========================== -->
+
+    <div id="floatingTools">
+
+        <button id="drawBtn">
+
+            ✏ Draw
+
+        </button>
+
+        <button id="pingBtn">
+
+            📍 Ping
+
+        </button>
+
+        <button id="saveBtn">
+
+            💾 Save
+
+        </button>
+
+        <button id="clearBtn">
+
+            🗑 Clear
+
+        </button>
+
+    </div>
+
 
     <script src="script.js"></script>
 
